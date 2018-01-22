@@ -702,9 +702,7 @@ NS_ASSUME_NONNULL_BEGIN
                                      inThread:thread
                                   messageType:TSInfoMessageTypeSessionDidEnd] saveWithTransaction:transaction];
 
-    dispatch_async([OWSDispatch sessionStoreQueue], ^{
-        [self.storageManager deleteAllSessionsForContact:envelope.source];
-    });
+    [self.storageManager deleteAllSessionsForContact:envelope.source protocolContext:transaction];
 }
 
 - (void)handleExpirationTimerUpdateMessageWithEnvelope:(OWSSignalServiceProtosEnvelope *)envelope
